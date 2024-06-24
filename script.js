@@ -1,4 +1,4 @@
-let nome = 'Johny'
+let nome = 'Johny '
 
 let numero
 
