@@ -1,5 +1,5 @@
-//repetir 3x São Longuinho
-// a cada vez que chamar são longuinho ganhará 100 reais
+// // repetir 3x São Longuinho
+// // a cada vez que chamar são longuinho ganhará 100 reais
 // let vezes = 3
 // let i = 1
 // let acumulador = 0
@@ -47,22 +47,22 @@
 // }
 
 let senha = 'zoio'
-let user = 'nulo'
-let k = 1
+let user = prompt('digite sua senha:')
+let contagem = 1
+let limite = 3
 
-while(k<=3){
-     user = prompt('digite sua senha:')
+while(senha != user && contagem<limite){
+     user = prompt(`senha incorreta, restam ${limite - contagem} tentativas, tente novamente:`)
+     contagem += 1
+}
 
-if(user==senha){
+if(senha == user){
     console.log('caminho feliz')
-    k+=3
 }
 else{
-    console.log('senha incorreta, tente novamente!')
-    k+=1
+    console.log('errou a senha três vezes')
 }
 
-}
-if(k==3){
-console.log('errou a três vezes')
-}
+
+
+
