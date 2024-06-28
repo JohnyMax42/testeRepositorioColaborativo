@@ -2,6 +2,7 @@ let num1 = Number(prompt('primeiro número'))
 let operacao = prompt(`Selecione a operação: \n adição: + \n subtração: - \n multiplicação: * \n divisão: /`)
 let num2 = Number(prompt('segundo número'))
 
+function calculadora(num1, num2, operacao){
 switch (operacao) {
     case "+":
         console.log(`${num1} + ${num2} = ${num1+num2}`)
@@ -23,4 +24,5 @@ switch (operacao) {
     default:
         console.log(`opção invalida`)
        break;
+}
 }
