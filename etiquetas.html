@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="#">
+        <label for="valor">Valor da peça:</label>
+        <input type="number" name="etiquetas" id="valor"> <br>
+        <label for="quantidade">Quantidade:</label>
+        <input type="number" name="etiquetas" id="quantidade"> <br>
+	    <label for="">Cor da etiqueta:</label> <br>
+        <input type="radio" name="etiquetaCor" id="vermelho">
+        <label for="vermelho">vermelho</label>
+        <input type="radio" name="etiquetaCor" id="amarelo">
+        <label for="amarelo">amarelo</label>
+        <input type="radio" name="etiquetaCor" id="verde"> 
+        <label for="verde">verde</label> <br>
+        <input onclick="calculoDesconto()" type="button" value="Calcular">
+     </form>
+
+     <div>
+        <p></p>
+     </div>
+
+     <script>
+        let valorRoupas = document.querySelector('#valor')
+        let quantidadeRoupas = document.querySelector('#quantidade')
+        let corEtiquetas = document.getElementsByName('etiquetaCor')
+
+        let final = document.querySelector('div')
+
+        function calculoDesconto(){
+            let desconto1 = 0
+            let desconto2 = 0
+            let cor = 'indefinida'
+            if(corEtiquetas[0].checked==true){
+                desconto1 = 0.5
+                cor = corEtiquetas[0].value
+            } else if(corEtiquetas[1].checked==true){
+                desconto1 = 0.3
+                cor = corEtiquetas[1].value
+            } else if(corEtiquetas[2].checked==true){
+                desconto1 = 0.15
+                cor = corEtiquetas[2].value
+            } else{
+                final.innerHTML = `<p>Preencha todos os campos!</p>`
+            }
+            if(quantidadeRoupas.value>2){
+                desconto2 = 0.1
+            }else if(quantidadeRoupas.value<=2){
+                desconto2 = 0
+            }
+            else{
+                final.innerHTML = `<p>Preencha todos os campos!</p>`
+            }
+
+            let total = (valorRoupas.value * (1 - desconto1 - desconto2))*quantidadeRoupas.value
+
+            final.innerHTML = `
+                            <ul>
+                                <li>preço original da peça R$${valorRoupas.value}</li>
+                                <li>Cor da etiqueta: ${cor}</li>
+                                <li>Desconto da etiqueta ${desconto1*100}%</li>
+                                <li>quantidade de peças ${quantidadeRoupas.value}</li>
+                                <li>desconto pela qantidade ${deconto2*100}%</li>
+                                <li>total da compra com o desconto: R$${total}</li>
+                            </ul>
+                            `
+            // final.innerHTML = `<p>com o desconto de ${(desconto1+desconto2)*100}% o valor final fica R$${(valorRoupas.value * (1 - desconto1 - desconto2))*quantidadeRoupas.value}</p>`
+
+        }
+
+     </script>
+    
+</body>
+</html>
