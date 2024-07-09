@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+    //    try {
+    //     //todo código possivel de erro
+    //     let numero = Number(prompt('digite apenas 1 ou 2'))
+    //     if(numero==1 || numero==2){
+    //         alert('certo')
+    //     }
+    //     else{
+    //         throw new Error('você não digitou 1 ou 2. erro personalizado')
+    //     }
+    //    } catch (error) {
+    //     //captar qualquer erro levantado no bloco try
+    //     console.log(error.message)
+    //    }
+
+    //    alert('executei mesmo com erro')
+    try {
+        let valor = Number(prompt('qual o valor do produto?'))
+        let etiqueta = prompt('qual a cor da etiqueta?')
+        if(valor=!NaN && (etiqueta=='vermelho' || etiqueta=='amarelo' || etiqueta=='azul')){
+            alert('certo')
+        } else{
+            throw new Error('alguma informação não corresponde ao pedido')
+        }
+    } catch (error) {
+        alert(error.message)
+    }
+    finally{
+
+    }
+    </script>
+</body>
+</html>
