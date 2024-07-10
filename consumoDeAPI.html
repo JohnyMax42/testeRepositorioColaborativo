@@ -22,6 +22,25 @@
             fetch(`https://viacep.com.br/ws/${CEP}/json/`).then((resposta)=>resposta.json()).then((objeto)=> console.log(objeto)).catch((e)=>console.log('ocorreu um erro e eu tratei'))
         }
 
+        // function buscarCEP(CEP){
+        //     try{
+        //     fetch(`https://viacep.com.br/ws/${CEP}/json/`)
+        //     .then((resposta)=>resposta.json())
+        //     .then((objeto)=> console.log(objeto))
+        //     .catch((e)=>console.log('ocorreu um erro e eu tratei'))
+        //     }catch(e){
+        //         console.log('ocorreu um erro e eu tratei')
+        //     }
+        // }
+
+        // async function mostrarCEPtela(cep){
+        //     let objCEP = await buscarCEP(cep)
+
+        //     let divCEP = document.createElement('div')
+
+        //     let pCEP = document.createElement
+        // }
+
         bntCEP.addEventListener('click',()=>buscarCEP(cep.value))
 
         // fetch(`https://viacep.com.br/ws/${cep.value}/json/`).then((resposta)=>resposta.json()).then((objeto)=> console.log(objeto)).catch((e)=>console.log('ocorreu um erro e eu tratei'))

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Cotação de moedas</h1>
+    <form action="#">
+        <label for="valor">Valor a converter:</label>
+        <input type="number" name="" id="valor" placeholder="R$">
+        <div><br>
+        <button id="usd">Dólar</button>
+        <button id="eur">Euro</button>
+        <button id="btc">BitCoin</button>
+        </div>
+    </form>
+
+    <div id="conversaoMoeda">
+
+    </div>
+    <script>
+        async function converterMoeda(codigoMoeda){
+          let resposta = await fetch(`https://economia.awesomeapi.com.br/last/${codigoMoeda}-BRL`)
+          let cotacao = await resposta.json()
+          montarTela(await cotacao[codigoMoeda+'BRL'])
+        }
+
+        function montarTela(objeto){
+            let converMoedaDiv = document.getElementById('conversaoMoeda')
+
+            let titulo = document.createElement('h1')
+            titulo.innerHTML = objeto.name
+
+            let valor = document.createElement('p')
+            let valorOriginalReal = document.getElementById('valor').value
+            valor.innerHTML = `R$ ${valorOriginalReal/objeto.bid}`
+
+            let valorConvertido = document.createElement('p')
+            valorConvertido.innerHTML = `${objeto.code} ${valorOriginalReal/objeto.bid}`
+
+            converMoedaDiv.appendChild(titulo)
+            converMoedaDiv.appendChild(valor)
+            converMoedaDiv.appendChild(valorConvertido)
+
+            let dataCotacao = document.createElement('h5')
+            dataCotacao.innerHTML = objeto.create_date
+            converMoedaDiv.appendChild(dataCotacao)
+
+            let btnUsd = document.getElementById('usd')
+            btnUsd.addEventListener('click', ()=>{converterMoeda('USD')})
+        }
+    </script>
+</body>
+</html>
