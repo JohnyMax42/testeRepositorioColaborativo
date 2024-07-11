@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            width: 300px;
+            height: 350px;
+            border-radius: 15px;
+            background-color: rgb(45, 45, 45);
+            margin-left: 50px;
+            padding: 15px;
+        }
+
+        #pesquisaCidade{
+            background-color: rgb(60, 60, 60);
+            color: white;
+            border: 0px;
+            border-radius: 25px;
+            height: 25px;
+            width: 240px;
+            padding-left: 10px;
+        }
+
+        #botaoPesquisa{
+            border-radius: 50%;
+            border: 2px;
+            width: 25px;
+            height: 25px;
+            color: black;
+        }
+
+        h1{
+            color: white;
+        }
+
+        .quadro{
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+        }
+
+        div{
+            display: flex;
+            flex-direction: row;
+        }
+
+        p{
+            margin: 10px;
+        }
+
+        #botoes0{
+            width: 300px;
+            height: 150px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        #botoes1{
+            flex-direction: column;
+        }
+
+        #botoes2{
+            flex-direction: column;
+        }
+
+        button{
+            width: 100px;
+            height: 25px;
+            color: white;
+            background-color: rgb(125, 125, 125);
+            border: 0px;
+            border-radius: 25px;
+        }
+    </style>
+</head>
+<body>
+
+    <main class="container">
+
+        <form action="#">
+            <input type="text" name="" id="pesquisaCidade" placeholder="Digite o nome da cidade">
+            <button id="botaoPesquisa">🔍︎</button>
+        </form>
+    
+        <h1 id="cidade">Tempo em cidade</h1>
+    
+        <div class="quadro">
+            <div>
+                <p id="temp">TemperaturaºC</p>
+                <p id="umidade">Umidade:</p>
+            </div>
+            <div>
+                <img id="icone" src="" alt="icone tempo">
+                <p id="descricao">Previsão</p>
+            </div>
+        </div>
+
+        <div id="botoes0">
+        <div id="botoes1">
+        <button id="cid1">Nova York</button><br>
+        <button id="cid2">Londres</button><br>
+        <button id="cid3">Paris</button><br>
+        <button id="cid4">Tokyo</button>
+        </div>
+
+        <div id="botoes2">
+        <button id="cid5">São Paulo</button><br>
+        <button id="cid6">Moscou</button><br>
+        <button id="cid7">Xangai</button><br>
+        <button id="cid8">Mumbai</button>
+        </div>
+
+    </div>
+        
+    </main>
+
+    <script>
+        const chave = '&appid=cebcd482eda57fa9a6714c1c2ba91885'
+        const apiWeather = 'https://api.openweathermap.org/data/2.5/weather?q='
+        const linguagem = '&lang=pt_br'
+        const unidade = '&units=metric'
+        const urlImagem = 'https://openweathermap.org/img/wn/'
+
+        let inputCidade = document.getElementById('pesquisaCidade')
+        let bntPesquisa = document.getElementById('botaoPesquisa')
+        let tituloCidade = document.getElementById('cidade')
+        let temperatura = document.getElementById('temp')
+        let umidade = document.getElementById('umidade')
+        let descricaoCeu = document.getElementById('descricao')
+        let icone = document.getElementById('icone')
+
+        //urlAPI + cidade + chave + linguagem + unidade
+
+        async function buscarCidade(nomeCidade){
+            url = apiWeather + nomeCidade + chave + linguagem + unidade
+            const resposta = await fetch(url)
+            const objeto = await resposta.json()
+            return objeto
+        }
+
+        async function exibirInformacoes(cidade){
+            let informacoes = await buscarCidade(cidade)
+
+            tituloCidade.innerHTML = informacoes.nome
+            temperatura.innerHTML = informacoes.main.temp + 'ºC'
+            umidade.innerHTML = informacoes.main.humidity + '%'
+
+            descricaoCeu.innerHTML = informacoes.weather[0].description
+            icone.src = urlImagem + informacoes.weather[0].icon + '@2x.png'
+        }
+
+        async function pesquisar(){
+            let cidade = inputCidade.value
+            exibirInformacoes(cidade)
+        }
+
+        bntPesquisa.addEventListener('click', pesquisar())
+
+
+        // fetch(url).
+        // then(response => {
+        //     return response.json()
+        // }).then(data =>{
+        //     console.log(data)
+        // }).catch(err => {
+        //     console.error(err)
+        // }) 
+
+    </script>
+</body>
+</html>
